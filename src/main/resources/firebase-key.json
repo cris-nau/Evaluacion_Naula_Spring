@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "proyecto-naula-mendez",
+  "private_key_id": "9637a9f62246dc8218ba71063b670716418b4d01",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDJMR8UuGm/eoK6\ngrl5ntXnQZEaJMj8md9mfsdCvQ2qe8UZiI4et2R5VhRBhIPWEMLCpluVendHlV4x\n5jkyhHfw57Fu1fh0evwabXlLtnlyS7H0E4fTLoCw/WWHGdNzsOAoS1n3GAdjmgSK\njRwwrdtbrAv1XKWhqGJpypTA1pJLMn4wD5RBGEGRqmkseBhjW+IegtgBJDFZZ/Ch\nzZrDudYc2vuHIvdL/FssQD3ddsptcuQS9O2v0598rSKRzT39b1jOaNIcqqJElIPN\nk5Ja4s0qMKgNc6QHShP059wZvTcMVxWsatp8lhuWSTOml4CgigEg+7p5IRc6ZUiN\nQJLPQFHdAgMBAAECggEAMBLmehlBnXEM5TugzYyUUJSUczKIewFahf9zpgEOD6dQ\n9rOwP+sy3SJiJzCenus02nWNSzeu4kIw9ovsLWPFVCFMvq7ulgigDkGL2vlQZizr\nqeZzzVSeiAwYczKK2elQ+pfcuKP7egN+o8upiYE1ed9voRKg+jKFx4EST8zFuqU6\nc4msDPOZM6vhxjaF/pOPe/BSYjJeKY3osm+z40E+kfrDcojl47uGcDNYLKtQXhgI\nwy1ITSnTuNs7dI3C5CsvXvTZxAPf4Fbc/R+rbG/kaA/T1UgXFFEwcIzoELAuJD13\nRrJaRc/XiKtjV6hEWKXi6vlWMSIcDgoE+CTIVcLuyQKBgQD3GzLQ3R1iNhCNPr+8\nYCb2xIQTjV3qeL1zHhDEkNmum8sTwYn8VufDTHzniUpPAzqsQdI1tEp1QG2LoVed\nWNg2U8uiQaHsj3N0nHW9csj1qexC+CJGcBghfUDTjRs9r2sTwvQQKbCjon1USx7c\nMTZDOiEtuDQyez373Bw/a9+fxQKBgQDQbt/iWuRv2rPbWMFsxXTpRGlKoiYPXL5Q\n3REfuyr2x8nxVqo9lYixAUAqcHJ7apr5+4yBL6dxVAfniWNdL367KNfz/ReQOy0H\nVDAUNg24+xIn+2/Kc3mm4VFnDbOWXOqC6q8UcPt5mm7qXuxD2rkmNMMtm1Mvk1pW\nN0QfS7OzOQKBgQCK+Pb5VIIEDBf+9/1pekIvopINVQIurj0OEyinBDgI5YGu2Lg7\n/LxXsBrHNQVfrpc+7b3FimId02BImTLnQWJIG5R46qSgoIT0XlIxe+7divVfLKJK\nLxzDKOhekgtyA8ga0xfkRy4auXX3BFCU0fCMmpKyXditU3amwUH5wTeBaQKBgClV\n47abOfRo1gRpHKr6mc3tEEiJ0ax4QxH8VXoKf2HDi2v+OPLPpfUcf2IrPLj3ElcD\nKQExty5FcO/dEkSXt7VcSz+K8NJcufhbHNHVSnFl8VrWhXwL3JNY2fDrCbOHJ8bg\nzenq4iRimR6HxqlKRi+qhQ6VYDDuMxsoCK2AMNoZAoGAPuL8gmrOc7J/SP7XJBSq\n5eE8Hg3GF80xQTId5v85P/Aun8E3/l1aCxQN3mDMATQG+70DJGUF3AhPSIbK/W8f\n+hCfhetvhdjWddh49S9tImebFlRkEur5S0l9iX3/UyNKb4Vkee9yaaztMZvXgoTW\npz771cjOWmmSQPSXThV7ixM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@proyecto-naula-mendez.iam.gserviceaccount.com",
+  "client_id": "103894623006487249146",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40proyecto-naula-mendez.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
