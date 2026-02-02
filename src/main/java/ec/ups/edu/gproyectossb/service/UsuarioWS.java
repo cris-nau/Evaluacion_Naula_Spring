@@ -18,7 +18,7 @@ class TokenDTO {
 }
 
 @RestController
-@RequestMapping("api/persona")
+@RequestMapping("api/usuario")
 @CrossOrigin(origins = "*")
 public class UsuarioWS {
 

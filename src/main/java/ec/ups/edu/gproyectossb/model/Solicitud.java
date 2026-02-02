@@ -21,6 +21,9 @@ public class Solicitud {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="sol_id")
     private int id;
+	
+	@Column(name="sol_horario")
+    private String horario;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="sol_fecha")
@@ -38,7 +41,7 @@ public class Solicitud {
     private Usuario cliente;
     
     
-    @Column(name = "id_programador", nullable = false)
+    @Column(name = "prog_id_fk", nullable = false)
     private Integer idProgramador;
 
 
@@ -100,8 +103,16 @@ public class Solicitud {
 	public void setProgramador(Integer programador) {
 		this.idProgramador = programador;
 	}
+
+
+	public String getHorario() {
+		return horario;
+	}
+
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
 	
 	
-    
-    
 }

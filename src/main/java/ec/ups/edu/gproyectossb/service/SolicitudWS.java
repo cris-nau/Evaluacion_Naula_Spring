@@ -108,6 +108,16 @@ public class SolicitudWS {
             return ResponseEntity.internalServerError().build();
         }
     }
+    
+    @GetMapping("/stats/programador")
+    public ResponseEntity<Map<String, Long>> obtenerEstadisticasProg(@RequestParam("id") int idProgramador) {
+        try {
+            Map<String, Long> stats = gs.obtenerEstadisticasProgramador(idProgramador);
+            return ResponseEntity.ok(stats);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
     private Map<String, Object> generarError(String titulo, String detalle) {
         Map<String, Object> error = new HashMap<>();

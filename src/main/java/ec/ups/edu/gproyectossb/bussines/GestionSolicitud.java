@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ec.ups.edu.gproyectossb.dao.ProgramadorDAO;
 import ec.ups.edu.gproyectossb.dao.SolicitudDAO;
 import ec.ups.edu.gproyectossb.dao.UsuarioDAO;
-import ec.ups.edu.gproyectossb.model.Solicitud;
+import ec.ups.edu.gproyectossb.model.*;
 import ec.ups.edu.gproyectossb.model.Usuario;
 import ec.ups.edu.gproyectossb.service.EmailWS;
 
@@ -25,6 +26,9 @@ public class GestionSolicitud {
     
     @Autowired
     private EmailWS emailService;
+    
+    @Autowired
+    private ProgramadorDAO proDAO;
 
     @Transactional
     public Solicitud actualizarEstado(int idSolicitud, String nuevoEstado) throws Exception {
@@ -72,7 +76,7 @@ public class GestionSolicitud {
 
         // 2. NUEVO: Buscar los datos del Programador para obtener su correo
         // Asumiendo que usas el mismo usuarioDAO o uno específico para programadores
-        Usuario programador = usuarioDAO.findById(s.getProgramador())
+        Programador programador = proDAO.findById(s.getProgramador())
                 .orElseThrow(() -> new Exception("El programador especificado no existe"));
 
         if (s.getMensaje() == null || s.getMensaje().isEmpty()) {
@@ -171,6 +175,25 @@ public class GestionSolicitud {
             }
         }
 
+        return estadisticas;
+    }
+    
+    public Map<String, Long> obtenerEstadisticasProgramador(int idProgramador) {
+        // Llamamos al nuevo método del DAO
+        List<Object[]> resultados = solicitudDAO.contarPorEstadoProgramador(idProgramador);
+        
+        Map<String, Long> estadisticas = new HashMap<>();
+        estadisticas.put("PENDIENTE", 0L);
+        estadisticas.put("ACEPTADA", 0L);
+        estadisticas.put("RECHAZADA", 0L);
+
+        if (resultados != null) {
+            for (Object[] fila : resultados) {
+                String estado = (String) fila[0];
+                Long cantidad = (Long) fila[1];
+                estadisticas.put(estado, cantidad);
+            }
+        }
         return estadisticas;
     }
 }
