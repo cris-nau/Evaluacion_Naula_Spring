@@ -17,9 +17,9 @@ class TokenDTO {
     public String token;
 }
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("api/usuario")
-@CrossOrigin(origins = "*")
 public class UsuarioWS {
 
 	@Autowired
