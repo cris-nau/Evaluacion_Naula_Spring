@@ -23,17 +23,13 @@ public class EmailWS {
     // ==========================================
     @PostMapping("/enviar")
     public ResponseEntity<?> enviarDesdeAngular(@RequestBody Map<String, String> body) {
-        String destinatario = body.get("destinatario");
-        String asunto = body.get("asunto");
-        String cuerpo = body.get("cuerpo");
-        
         try {
-            // Reutilizamos la lógica interna
-            this.enviarCorreo(destinatario, asunto, cuerpo);
-            return ResponseEntity.ok("Correo enviado con éxito");
+            this.enviarCorreo(body.get("destinatario"), body.get("asunto"), body.get("cuerpo"));
+            return ResponseEntity.ok("✅ Correo enviado con éxito");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("Error: " + e.getMessage());
+            // AHORA SÍ VERÁS EL ERROR EN HOPPSCOTCH
+            e.printStackTrace();
+            return ResponseEntity.status(500).body("❌ ERROR REAL: " + e.getMessage());
         }
     }
 
@@ -42,19 +38,14 @@ public class EmailWS {
     // ¡NO BORRES ESTE MÉTODO PUBLIC!
     // ==========================================
     public void enviarCorreo(String destinatario, String asunto, String cuerpo) {
-        try {
-            SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(remitente); 
-            message.setTo(destinatario);
-            message.setSubject(asunto);
-            message.setText(cuerpo);
-            
-            // Esto envía el correo. Si tarda más de 5 seg, fallará aquí en lugar de colgar el server
-            mailSender.send(message); 
-            System.out.println("✅ Correo enviado a: " + destinatario);
-        } catch (Exception e) {
-            System.err.println("❌ Fallo crítico de correo: " + e.getMessage());
-            // No lanzamos RuntimeException aquí para que el 502 no ocurra
-        }
+        // ELIMINAMOS EL TRY-CATCH DE AQUÍ PARA QUE EL ERROR SUBA
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(remitente); 
+        message.setTo(destinatario);
+        message.setSubject(asunto);
+        message.setText(cuerpo);
+        
+        mailSender.send(message); // Si esto falla, ahora explotará y lo verás
+        System.out.println("✅ Correo enviado a: " + destinatario);
     }
 }
