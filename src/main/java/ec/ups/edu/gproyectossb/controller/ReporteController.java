@@ -39,7 +39,7 @@ public class ReporteController {
     // =========================================================
     // 1. DASHBOARD
     // =========================================================
-    @GetMapping("/dashboard-admin")
+    /*@GetMapping("/dashboard-admin")
     public ResponseEntity<Map<String, Object>> obtenerDashboard(
             @RequestParam(required = false) String fechaInicio,
             @RequestParam(required = false) String fechaFin,
@@ -65,6 +65,56 @@ public class ReporteController {
         response.put("meses", Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"));
         response.put("asesoriasPorMes", conteoPorMes);
         // Enviamos el total de proyectos filtrados (puedes ajustar esta lógica si quieres proyectos por mes)
+        response.put("proyectosPorMes", Arrays.asList(0, 0, 0, 0, 0, proyectos.size())); 
+
+        return ResponseEntity.ok(response);
+    }*/
+    @GetMapping("/dashboard-admin")
+    public ResponseEntity<Map<String, Object>> obtenerDashboard(
+            @RequestParam(required = false) String fechaInicio,
+            @RequestParam(required = false) String fechaFin,
+            @RequestParam(required = false) Integer idProgramador,
+            @RequestParam(required = false) String estado
+    ) {
+        Map<String, Object> response = new HashMap<>();
+
+        // 1. CARGAR SOLICITUDES (Esto sí es responsabilidad de Spring Boot)
+        List<Solicitud> solicitudes;
+        try {
+            solicitudes = solicitudDAO.findAll();
+            solicitudes = filtrarSolicitudes(solicitudes, fechaInicio, fechaFin, idProgramador, estado);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(Map.of("error", "Fallo al leer solicitudes: " + e.getMessage()));
+        }
+
+        // 2. CARGAR PROYECTOS (CON PROTECCIÓN)
+        // Si la tabla no existe o falla, devolvemos lista vacía para no romper el dashboard
+        List<Proyecto> proyectos = new ArrayList<>();
+        try {
+            // Solo intentamos buscar si el DAO está inyectado y funciona
+            if (proyectoDAO != null) {
+                proyectos = proyectoDAO.findAll();
+                if (idProgramador != null && idProgramador != 0) {
+                    proyectos = filtrarProyectos(proyectos, idProgramador);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("⚠️ Advertencia: No se pudieron cargar proyectos (¿Falta la tabla en Spring?): " + e.getMessage());
+            // No lanzamos error, solo dejamos la lista vacía
+        }
+
+        // 3. ARMAR RESPUESTA
+        response.put("totalPendientes", contarPorEstado(solicitudes, "PENDIENTE"));
+        response.put("totalAceptadas", contarPorEstado(solicitudes, "ACEPTADA"));
+        response.put("totalRechazadas", contarPorEstado(solicitudes, "RECHAZADA"));
+
+        // Gráfico de Barras
+        List<Integer> conteoPorMes = calcularSolicitudesPorMes(solicitudes);
+        response.put("meses", Arrays.asList("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"));
+        response.put("asesoriasPorMes", conteoPorMes);
+        
+        // Si proyectos falló, enviamos 0, pero el dashboard carga igual
         response.put("proyectosPorMes", Arrays.asList(0, 0, 0, 0, 0, proyectos.size())); 
 
         return ResponseEntity.ok(response);
