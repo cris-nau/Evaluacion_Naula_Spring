@@ -44,19 +44,17 @@ public class EmailWS {
     public void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            
             message.setFrom(remitente); 
             message.setTo(destinatario);
             message.setSubject(asunto);
             message.setText(cuerpo);
             
-            mailSender.send(message);
+            // Esto envía el correo. Si tarda más de 5 seg, fallará aquí en lugar de colgar el server
+            mailSender.send(message); 
             System.out.println("✅ Correo enviado a: " + destinatario);
         } catch (Exception e) {
-            e.printStackTrace(); 
-            System.err.println("❌ Error enviando correo: " + e.getMessage());
-            // Si quieres que Angular se entere del error, podrías lanzar una RuntimeException aquí
-            throw new RuntimeException("Fallo en el envío SMTP: " + e.getMessage());
+            System.err.println("❌ Fallo crítico de correo: " + e.getMessage());
+            // No lanzamos RuntimeException aquí para que el 502 no ocurra
         }
     }
 }
